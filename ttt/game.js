@@ -7,7 +7,7 @@ function Game(reader) {
 }
 
 Game.prototype.isValidMove = function(pos) {
-  return this.board.grid[pos[0]][pos[1]] == "";
+  return this.board.grid[pos[0]][pos[1]] === "";
 };
 
 Game.prototype.switchMark = function() {
@@ -17,6 +17,7 @@ Game.prototype.switchMark = function() {
 Game.prototype.makeMark = function (pos, callback) {
   if (this.isValidMove(pos)) {
     this.board.grid[pos[0]][pos[1]] = this.mark;
+    this.switchMark();
   } else {
     console.log("Not a valid move.\n");
     callback();
@@ -38,10 +39,8 @@ Game.prototype.promptMove = function(callback) {
 };
 
 Game.prototype.run = function (completionCallback) {
-  this.board.print();
-  this.promptMove(this.run.bind(this, completionCallback));
-
   if (this.board.anyThreeInARow()) {
+    this.switchMark();
     console.log(this.mark + " won!");
     completionCallback();
   } else if (this.board.draw()) {
@@ -49,7 +48,8 @@ Game.prototype.run = function (completionCallback) {
     completionCallback();
   }
 
-  this.switchMark();
+  this.board.print();
+  this.promptMove(this.run.bind(this, completionCallback));
 };
 
 module.exports = Game;
