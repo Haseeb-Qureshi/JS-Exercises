@@ -40,9 +40,9 @@ HanoiGame.prototype.promptMove = function(callback) {
     input = input.split(' ');
 
     var positions = input.map(function (el){
-      return parseInt(el);
+      return parseInt(el) - 1;
     });
-    that.move(positions[0] - 1, positions[1] - 1);
+    that.move(positions[0], positions[1]);
     callback();
   });
 };
