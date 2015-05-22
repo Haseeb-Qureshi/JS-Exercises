@@ -24,8 +24,8 @@ Clock.prototype._tick = function () {
 
 };
 
-var clock = new Clock();
-clock.run();
+// var clock = new Clock();
+// clock.run();
 
 
 
@@ -51,18 +51,12 @@ var addNumbers = function (sum, numsLeft, completionCallback) {
   }
 };
 
-addNumbers(0, 3, function (sum) {
-  console.log("Total Sum: " + sum);
-  reader.close();
-});
+// addNumbers(0, 3, function (sum) {
+//   console.log("Total Sum: " + sum);
+//   reader.close();
+// });
 
 // absurdBubbleSort
-
-var readLine = require('readline');
-var reader = readLine.createInterface({
-  input: process.stdin,
-  output: process.stdout
-});
 
 function innerBubbleSortLoop(arr, i, madeAnySwaps, outerBubbleSortLoop) {
   if (i < arr.length - 1) {
@@ -72,8 +66,6 @@ function innerBubbleSortLoop(arr, i, madeAnySwaps, outerBubbleSortLoop) {
         arr[i] = arr[i + 1];
         arr[i + 1] = temp;
         madeAnySwaps = true;
-      } else {
-        madeAnySwaps = false;
       }
 
       innerBubbleSortLoop(arr, i + 1, madeAnySwaps, outerBubbleSortLoop);
@@ -92,6 +84,7 @@ function askIfGreaterThan(el1, el2, callback) {
 function absurdBubbleSort(arr, sortCompletionCallback) {
   function outerBubbleSortLoop(madeAnySwaps) {
     if (madeAnySwaps) {
+      madeAnySwaps = false;
       innerBubbleSortLoop(arr, 0, madeAnySwaps, outerBubbleSortLoop);
     } else {
       sortCompletionCallback(arr);
@@ -101,7 +94,9 @@ function absurdBubbleSort(arr, sortCompletionCallback) {
   outerBubbleSortLoop(true);
 }
 
-absurdBubbleSort([3, 2, 1], function (arr) {
+absurdBubbleSort([2, 3, 1, 4], function (arr) {
   console.log("Sorted array: " + JSON.stringify(arr));
   reader.close();
 });
+
+// fix madeAnySwaps logic
