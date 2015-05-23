@@ -8,8 +8,11 @@ Array.prototype.last = function () {
   return this[this.length - 1];
 };
 
-function HanoiGame() {
-  this.stacks = [[3, 2, 1], [], []];
+function HanoiGame(num) {
+  this.stacks = [[], [], []];
+  for (var i = 1; i <= num; i++) {
+    this.stacks[0].unshift(i);
+  }
 }
 
 HanoiGame.prototype.isWon = function() {
@@ -55,7 +58,7 @@ HanoiGame.prototype.run = function(completionCallback) {
   }
 };
 
-var game = new HanoiGame();
+var game = new HanoiGame(7);
 game.run(function () {
   console.log("Yes, you did!");
   reader.close();
